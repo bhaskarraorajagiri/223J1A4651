@@ -13,6 +13,7 @@ export const createShortUrl = async (req, res) => {
 
   try {
     const exists = await ShortUrl.findOne({ shortCode: code });
+
     if (exists && !shortcode) {
       return res.status(409).json({ error: 'Generated shortcode already exists' });
     }
@@ -60,7 +61,6 @@ export const getShortUrlStats = async (req, res) => {
   }
 };
 
-
 export const redirectToOriginalUrl = async (req, res) => {
   const { shortcode } = req.params;
 
@@ -74,7 +74,6 @@ export const redirectToOriginalUrl = async (req, res) => {
     if (shortUrl.expiry && new Date() > shortUrl.expiry) {
       return res.status(410).json({ error: 'Short URL has expired' });
     }
-
 
     shortUrl.visitCount += 1;
     await shortUrl.save();

@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
-import urlRoutes from './routes/url.routes.js';
+import urlRoutes from './routes/shortUrl.route.js';
 import { logger } from './middlewares/logger.js';
 
 dotenv.config();
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(logger); 
+app.use(logger);
 
 // Routes
 app.use('/', urlRoutes);
